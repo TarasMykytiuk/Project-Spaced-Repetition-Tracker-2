@@ -4,6 +4,7 @@ export class Controller {
         this.model = model;
     }
     init() {
+        this.view.addOptions(this.model.getUserIds());
         this.view.bindSomething(() => this.handleSomething());
     }
 
