@@ -2,16 +2,22 @@ export class View {
     #elements;
     constructor() {
         this.#elements = {
-            usrSelect: document.getElementById("user_select")
+            usrSelect: document.getElementById("user_select"),
+            agendaDisplay: document.getElementById("agenda_display")
         }
     }
 
-    bindSomething(handler) {
-        handler();
+    bindUsrSelection(handler) {
+        this.#elements.usrSelect.addEventListener("change", () => {
+            this.#elements.usrSelect.options[0].disabled = true;
+            this.#elements.usrSelect.options[0].hidden = true;
+            const usrId = this.#elements.usrSelect.value;
+            handler(usrId);
+        });
     }
 
-    displaySomething(something) {
-        alert(something);
+    displayAgenda(data) {
+        this.#elements.agendaDisplay.textContent = data ? data : "This user has no agenda to display.";
     }
 
     addOptions(values) {

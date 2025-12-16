@@ -3,12 +3,15 @@ export class Controller {
         this.view = view;
         this.model = model;
     }
+
     init() {
         this.view.addOptions(this.model.getUserIds());
-        this.view.bindSomething(() => this.handleSomething());
+        this.view.bindUsrSelection((usrId) => this.handleUsrSelection(usrId));
     }
 
-    handleSomething() {
-        this.view.displaySomething(this.model);
+    handleUsrSelection(usrId) {
+        //this.model.clearData(usrId);
+        const data = this.model.getData(usrId);
+        this.view.displayAgenda(data);
     }
 }
