@@ -1,15 +1,16 @@
 section {
-    width: 40%;
-    margin: 20px auto 10px auto;
-    padding: 20px;
+    width: 60%;
+    margin: 0 auto;
+    padding: 10px;
 }
 
-#user_select_container {
+#user_select_container,
+#agenda_form {
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     padding: 20px;
-    width: 20%;
+    width: 50%;
     border: 1px solid black;
     border-radius: 20px;
     align-items: center;
@@ -17,4 +18,12 @@ section {
 
 #user_select_container label {
     margin: 5px;
+}
+
+#agenda_form {
+    display: none;
+}
+
+#agenda_form input {
+    margin: 10px 0;
 }
