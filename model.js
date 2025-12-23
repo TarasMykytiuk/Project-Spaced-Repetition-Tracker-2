@@ -31,25 +31,26 @@ export class Model {
         localStorage.removeItem(`stored-data-user-${userId}`);
     }
 
-    generateAgendaList(usrId, callback) {
+    generateAgendaList(usrId, getRevisionDates) {
         const agendaList = [];
         const agenda = this.getData(usrId);
-        if (agenda) {
-            agenda.forEach(item => {
-                const revisionDates = callback(item.startDate);
-                revisionDates.forEach(date => {
-                    agendaList.push(
-                        {
-                            topic: item.topic,
-                            date: date
-                        }
-                    )
-                });
-            });
-            agendaList.sort((a, b) => {
-                return a.date - b.date;
-            })
+        if (!agenda) {
+            return agendaList;
         }
+        agenda.forEach(item => {
+            const revisionDates = getRevisionDates(item.startDate);
+            revisionDates.forEach(date => {
+                agendaList.push(
+                    {
+                        topic: item.topic,
+                        date: date
+                    }
+                )
+            });
+        });
+        agendaList.sort((a, b) => {
+            return a.date - b.date;
+        })
         return agendaList;
     }
 }

@@ -3,6 +3,7 @@ export class View {
     constructor() {
         this.#elements = {
             usrSelect: document.getElementById("user_select"),
+            deleteAgenda: document.getElementById("delete_agenda"),
             agendaForm: document.getElementById("agenda_form"),
             datePicker: document.getElementById("date_picker"),
             agendaInput: document.getElementById("agenda_text"),
@@ -29,6 +30,17 @@ export class View {
         });
     }
 
+    bindDeleteAgenda(handler) {
+        this.#elements.deleteAgenda.addEventListener("click", () => {
+            const usrId = this.#elements.usrSelect.value;
+            handler(usrId);
+        })
+    }
+
+    displayDeleteAgenda() {
+        this.#elements.deleteAgenda.style.display = "flex";
+    }
+
     displayAgendaForm() {
         this.#elements.agendaForm.style.display = "flex";
     }
@@ -44,11 +56,11 @@ export class View {
     }
 
     displayAgendaList(agendaList, getFormattedDate) {
-        if (agendaList.length == 0) {
-            this.#elements.agendaDisplay.textContent = "This user has no agenda to display.";
-            return
-        }
         this.#elements.agendaDisplay.innerHTML = "";
+        if (agendaList.length === 0) {
+            this.#elements.agendaDisplay.textContent = "This user has no agenda to display.";
+            return;
+        }
         agendaList.forEach(item => {
             const p = document.createElement("p");
             p.textContent = item.topic + ", " + getFormattedDate(item.date);

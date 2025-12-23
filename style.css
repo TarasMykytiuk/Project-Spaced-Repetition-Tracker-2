@@ -27,3 +27,12 @@ section {
 #agenda_form input {
     margin: 10px 0;
 }
+
+button {
+    margin: 5px;
+    padding: 5px;
+}
+
+#delete_agenda {
+    display: none;
+}

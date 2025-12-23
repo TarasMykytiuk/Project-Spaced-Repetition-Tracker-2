@@ -8,27 +8,34 @@ export class Controller {
     init() {
         this.view.addOptions(this.model.getUserIds());
         this.view.bindUsrSelection((usrId) => this.handleUsrSelection(usrId));
+        this.view.bindDeleteAgenda(() => this.handleDeleteAgenda());
         this.view.bindAgendaSubmit((agendaItem) => this.handleAgendaSubmit(agendaItem));
     }
 
     handleUsrSelection(usrId) {
-        //this.model.clearData(usrId);
-        const getCurrentDate = this.dateService.getCurrentDate();
-        this.view.datePickerSetDate(getCurrentDate);
+        const currentDate = this.dateService.getFormattedDate(new Date());
+        this.view.datePickerSetDate(currentDate);
+        this.view.displayDeleteAgenda();
         this.view.displayAgendaForm();
         this.model.setCurrentUsrId(usrId);
+        this.displayUserAgenda(usrId);
+    }
 
-        const agendaList = this.model.generateAgendaList(usrId, (startDate) => this.dateService.getRevisionDates(startDate));
-        this.view.displayAgendaList(agendaList, (date) => this.dateService.getFormattedDate(date));
-
+    handleDeleteAgenda() {
+        const usrId = this.model.getCurrentUsrId();
+        this.model.clearData(usrId);
+        this.displayUserAgenda(usrId);
     }
 
     handleAgendaSubmit(agendaItem) {
         const usrId = this.model.getCurrentUsrId();
         this.model.addData(usrId, agendaItem);
-        const getCurrentDate = this.dateService.getCurrentDate();
-        this.view.clearAgendaForm(getCurrentDate);
+        const currentDate = this.dateService.getFormattedDate(new Date());
+        this.view.clearAgendaForm(currentDate);
+        this.displayUserAgenda(usrId);
+    }
 
+    displayUserAgenda(usrId) {
         const agendaList = this.model.generateAgendaList(usrId, (startDate) => this.dateService.getRevisionDates(startDate));
         this.view.displayAgendaList(agendaList, (date) => this.dateService.getFormattedDate(date));
     }
