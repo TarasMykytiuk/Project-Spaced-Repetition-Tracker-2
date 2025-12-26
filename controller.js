@@ -13,7 +13,7 @@ export class Controller {
     }
 
     handleUsrSelection(usrId) {
-        const currentDate = this.dateService.getFormattedDate(new Date());
+        const currentDate = this.dateService.formatDateForDatePicker(new Date());
         this.view.datePickerSetDate(currentDate);
         this.view.displayDeleteAgenda();
         this.view.displayAgendaForm();
@@ -30,13 +30,13 @@ export class Controller {
     handleAgendaSubmit(agendaItem) {
         const usrId = this.model.getCurrentUsrId();
         this.model.addData(usrId, agendaItem);
-        const currentDate = this.dateService.getFormattedDate(new Date());
+        const currentDate = this.dateService.formatDateForDatePicker(new Date());
         this.view.clearAgendaForm(currentDate);
         this.displayUserAgenda(usrId);
     }
 
     displayUserAgenda(usrId) {
         const agendaList = this.model.generateAgendaList(usrId, (startDate) => this.dateService.getRevisionDates(startDate));
-        this.view.displayAgendaList(agendaList, (date) => this.dateService.getFormattedDate(date));
+        this.view.displayAgendaList(agendaList, (date) => this.dateService.formateDateForAgendaList(date));
     }
 }

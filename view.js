@@ -55,7 +55,7 @@ export class View {
         this.#elements.datePicker.value = date;
     }
 
-    displayAgendaList(agendaList, getFormattedDate) {
+    displayAgendaList(agendaList, formateDateForAgendaList) {
         this.#elements.agendaDisplay.innerHTML = "";
         if (agendaList.length === 0) {
             this.#elements.agendaDisplay.textContent = "This user has no agenda to display.";
@@ -63,7 +63,7 @@ export class View {
         }
         agendaList.forEach(item => {
             const p = document.createElement("p");
-            p.textContent = item.topic + ", " + getFormattedDate(item.date);
+            p.textContent = item.topic + ", " + formateDateForAgendaList(item.date);
             this.#elements.agendaDisplay.appendChild(p);
         });
     }
