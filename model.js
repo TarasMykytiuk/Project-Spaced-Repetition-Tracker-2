@@ -31,7 +31,7 @@ export class Model {
         localStorage.removeItem(`stored-data-user-${userId}`);
     }
 
-    generateAgendaList(usrId, getRevisionDates) {
+    generateAgendaList(usrId, getRevisionDates, currentDate) {
         const agendaList = [];
         const agenda = this.getData(usrId);
         if (!agenda) {
@@ -40,12 +40,9 @@ export class Model {
         agenda.forEach(item => {
             const revisionDates = getRevisionDates(item.startDate);
             revisionDates.forEach(date => {
-                agendaList.push(
-                    {
-                        topic: item.topic,
-                        date: date
-                    }
-                )
+                if (date >= currentDate) {
+                    agendaList.push({ topic: item.topic, date: date });
+                }
             });
         });
         agendaList.sort((a, b) => {

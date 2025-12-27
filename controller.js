@@ -36,7 +36,7 @@ export class Controller {
     }
 
     displayUserAgenda(usrId) {
-        const agendaList = this.model.generateAgendaList(usrId, (startDate) => this.dateService.getRevisionDates(startDate));
+        const agendaList = this.model.generateAgendaList(usrId, (startDate) => this.dateService.getRevisionDates(startDate), new Date());
         this.view.displayAgendaList(agendaList, (date) => this.dateService.formateDateForAgendaList(date));
     }
 }

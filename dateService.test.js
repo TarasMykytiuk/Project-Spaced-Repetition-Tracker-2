@@ -1,24 +1,22 @@
 import { DateService } from "./dateService.js";
-
 const dateService = new DateService();
-const dateFormatTime = "T00:00:00.000Z";
 
 test("formatted date for agenda list", () => {
-    expect(dateService.formateDateForAgendaList(new Date("2026-01-01" + dateFormatTime))).toEqual("1st january 2026");
-    expect(dateService.formateDateForAgendaList(new Date("2026-02-02" + dateFormatTime))).toEqual("2nd february 2026");
-    expect(dateService.formateDateForAgendaList(new Date("2026-04-03" + dateFormatTime))).toEqual("3rd april 2026");
+    expect(dateService.formateDateForAgendaList(new Date("2026-01-01"))).toEqual("1st january 2026");
+    expect(dateService.formateDateForAgendaList(new Date("2026-02-02"))).toEqual("2nd february 2026");
+    expect(dateService.formateDateForAgendaList(new Date("2026-04-03"))).toEqual("3rd april 2026");
 
-    expect(dateService.formateDateForAgendaList(new Date("2026-05-04" + dateFormatTime))).toEqual("4th may 2026");
+    expect(dateService.formateDateForAgendaList(new Date("2026-05-04"))).toEqual("4th may 2026");
 
-    expect(dateService.formateDateForAgendaList(new Date("2025-12-11" + dateFormatTime))).toEqual("11th december 2025");
-    expect(dateService.formateDateForAgendaList(new Date("2025-12-21" + dateFormatTime))).toEqual("21st december 2025");
-    expect(dateService.formateDateForAgendaList(new Date("2025-12-12" + dateFormatTime))).toEqual("12th december 2025");
-    expect(dateService.formateDateForAgendaList(new Date("2025-12-22" + dateFormatTime))).toEqual("22nd december 2025");
-    expect(dateService.formateDateForAgendaList(new Date("2025-12-13" + dateFormatTime))).toEqual("13th december 2025");
-    expect(dateService.formateDateForAgendaList(new Date("2025-12-23" + dateFormatTime))).toEqual("23rd december 2025");
+    expect(dateService.formateDateForAgendaList(new Date("2025-12-11"))).toEqual("11th december 2025");
+    expect(dateService.formateDateForAgendaList(new Date("2025-12-21"))).toEqual("21st december 2025");
+    expect(dateService.formateDateForAgendaList(new Date("2025-12-12"))).toEqual("12th december 2025");
+    expect(dateService.formateDateForAgendaList(new Date("2025-12-22"))).toEqual("22nd december 2025");
+    expect(dateService.formateDateForAgendaList(new Date("2025-12-13"))).toEqual("13th december 2025");
+    expect(dateService.formateDateForAgendaList(new Date("2025-12-23"))).toEqual("23rd december 2025");
 
-    expect(dateService.formateDateForAgendaList(new Date("2026-08-28" + dateFormatTime))).toEqual("28th august 2026");
-    expect(dateService.formateDateForAgendaList(new Date("2025-12-31" + dateFormatTime))).toEqual("31st december 2025");
+    expect(dateService.formateDateForAgendaList(new Date("2026-08-28"))).toEqual("28th august 2026");
+    expect(dateService.formateDateForAgendaList(new Date("2025-12-31"))).toEqual("31st december 2025");
 });
 
 test('revision dates generation', () => {
