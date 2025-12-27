@@ -40,7 +40,7 @@ export class Model {
         agenda.forEach(item => {
             const revisionDates = getRevisionDates(item.startDate);
             revisionDates.forEach(date => {
-                if (date >= currentDate) {
+                if (this.compareDates(date, currentDate)) {
                     agendaList.push({ topic: item.topic, date: date });
                 }
             });
@@ -49,5 +49,13 @@ export class Model {
             return a.date - b.date;
         })
         return agendaList;
+    }
+
+    compareDates(dateOne, dateTwo) {
+        let dateOneIso = dateOne.toISOString();
+        dateOneIso = dateOneIso.substring(0, dateOneIso.indexOf("T"));
+        let dateTwoIso = dateTwo.toISOString();
+        dateTwoIso = dateTwoIso.substring(0, dateTwoIso.indexOf("T"));
+        return dateOneIso >= dateTwoIso;
     }
 }
