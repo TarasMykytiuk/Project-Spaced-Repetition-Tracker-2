@@ -32,23 +32,16 @@ export class Model {
     }
 
     generateAgendaList(usrId, getRevisionDates, currentDate) {
-        const agendaList = [];
         const agenda = this.getData(usrId);
-        if (!agenda) {
-            return agendaList;
-        }
-        agenda.forEach(item => {
+        if (!agenda) { return [] }
+        return agenda.flatMap((item) => {
             const revisionDates = getRevisionDates(item.startDate);
-            revisionDates.forEach(date => {
+            return revisionDates.map(date => {
                 if (this.compareDates(date, currentDate)) {
-                    agendaList.push({ topic: item.topic, date: date });
+                    return { topic: item.topic, date: date };
                 }
-            });
-        });
-        agendaList.sort((a, b) => {
-            return a.date - b.date;
-        })
-        return agendaList;
+            }).filter((item) => item);
+        }).sort((a, b) => { return a.date - b.date; });
     }
 
     compareDates(dateOne, dateTwo) {
