@@ -32,8 +32,7 @@ export class Model {
     }
 
     generateAgendaList(usrId, getRevisionDates, currentDate) {
-        const agenda = this.getData(usrId);
-        if (!agenda) { return [] }
+        const agenda = this.getData(usrId) || [];
         return agenda.flatMap((item) => {
             const revisionDates = getRevisionDates(item.startDate);
             return revisionDates.map(date => {
